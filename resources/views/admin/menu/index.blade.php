@@ -63,7 +63,8 @@
                     class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
                     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                         <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Tambah Menu Baru</h3>
-                        <form action="{{ route('admin.menu.store') }}" method="POST" class="mt-4 space-y-4">
+                        <form action="{{ route('admin.menu.store') }}" method="POST" enctype="multipart/form-data"
+                            class="mt-4 space-y-4">
                             @csrf
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Nama Menu</label>
@@ -90,7 +91,13 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700">URL Gambar</label>
+                                <label class="block text-sm font-medium text-gray-700">Upload Foto (Opsional)</label>
+                                <input type="file" name="image_file" accept="image/*"
+                                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                                <p class="text-xs text-gray-500 mt-1">Atau gunakan URL Link di bawah</p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">URL Gambar (Opsional)</label>
                                 <input type="url" name="image"
                                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
                             </div>

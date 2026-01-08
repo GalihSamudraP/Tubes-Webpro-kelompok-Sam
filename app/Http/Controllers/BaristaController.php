@@ -7,9 +7,14 @@ use App\Models\Order;
 
 class BaristaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $orders = Order::with('user', 'items.product')->latest()->get();
+
+        if ($request->has('partial')) {
+            return view('barista.partials.orders_list', compact('orders'));
+        }
+
         return view('barista.dashboard', compact('orders'));
     }
 
@@ -29,5 +34,16 @@ class BaristaController extends Controller
         $order->update($updateData);
 
         return redirect()->back()->with('success', 'Order status updated!');
+    }
+
+    public function confirmPayment(Order $order)
+    {
+        if ($order->payment_status === 'paid') {
+            return redirect()->back()->with('error', 'Pesanan sudah dibayar.');
+        }
+
+        $order->update(['payment_status' => 'paid']);
+
+        return redirect()->back()->with('success', 'Pembayaran dikonfirmasi!');
     }
 }

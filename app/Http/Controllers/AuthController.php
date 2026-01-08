@@ -50,8 +50,38 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|in:client,barista,admin', // For demo purposes, allow selecting role
         ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => 'client',
+        ]);
+
+        Auth::login($user);
+
+        return redirect()->route('home');
+    }
+
+    public function showRegisterStaff()
+    {
+        return view('auth.register-staff');
+    }
+
+    public function registerStaff(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'role' => 'required|in:barista,admin',
+            'secret_key' => 'required|string',
+        ]);
+
+        if ($request->secret_key !== env('STAFF_REGISTRATION_SECRET')) {
+            return back()->withErrors(['secret_key' => 'Invalid secret key. Access denied.'])->withInput();
+        }
 
         $user = User::create([
             'name' => $request->name,

@@ -13,5 +13,6 @@ class Promo extends Model
         'code',
         'discount_percentage',
         'is_active',
+        'expires_at',
     ];
 }

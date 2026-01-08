@@ -19,6 +19,7 @@
                             (%)</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status
                         </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -32,6 +33,13 @@
                                     class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $promo->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
                                     {{ $promo->is_active ? 'Aktif' : 'Tidak Aktif' }}
                                 </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <form action="{{ route('admin.promos.destroy', $promo) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus promo ini?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-600 hover:text-red-900 font-bold">Hapus</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
@@ -61,6 +69,16 @@
                                 <label class="block text-sm font-medium text-gray-700">Diskon (%)</label>
                                 <input type="number" name="discount_percentage" min="0" max="100" step="0.01" required
                                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Durasi Kadaluarsa</label>
+                                <select name="duration" required
+                                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                                    <option value="5">5 Menit</option>
+                                    <option value="60">60 Menit (1 Jam)</option>
+                                    <option value="120">120 Menit (2 Jam)</option>
+                                    <option value="1200">1200 Menit (20 Jam)</option>
+                                </select>
                             </div>
                             <div class="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
                                 <button type="submit"

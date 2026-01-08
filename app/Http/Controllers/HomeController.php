@@ -19,6 +19,7 @@ class HomeController extends Controller
 
     public function show(Product $product)
     {
+        $product->load(['ratings.user']);
         $product->loadAvg('ratings', 'rating');
         return view('client.show', compact('product'));
     }

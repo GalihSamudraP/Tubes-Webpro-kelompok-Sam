@@ -29,6 +29,8 @@
         }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
     <style>
         body {
             font-family: 'Outfit', sans-serif;
@@ -38,7 +40,7 @@
     </style>
 </head>
 
-<body class="text-gray-800">
+<body class="text-gray-800 flex flex-col min-h-screen">
     <nav class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
@@ -80,7 +82,7 @@
         </div>
     </nav>
 
-    <main class="py-10">
+    <main class="py-10 flex-grow">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             @if(session('success'))
                 <div class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
@@ -103,9 +105,18 @@
         </div>
     </main>
 
-    <footer class="bg-gray-100 border-t mt-12">
-        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            <p class="text-center text-gray-500 text-sm">&copy; 2024 CoffeeShop. All rights reserved.</p>
+    <footer class="bg-white border-t mt-12 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-amber-600 mr-2">☕ TwoCoff</span>
+                    <span class="text-gray-500 text-sm">| Premium Coffee Experience</span>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-gray-500 text-sm">&copy; {{ date('Y') }} TwoCoff. All rights reserved.</p>
+                    <p class="text-gray-400 text-xs mt-1">Made with <span class="text-red-500">d</span> and Coffee</p>
+                </div>
+            </div>
         </div>
     </footer>
 </body>
